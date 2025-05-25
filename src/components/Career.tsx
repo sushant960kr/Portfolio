@@ -15,45 +15,36 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Position In Company</h4>
-                <h5>Company Name</h5>
+                <h4>Cloud Architect</h4>
+                <h5>Encryptix</h5>
               </div>
-              <h3>20XX</h3>
+              <h3>2024</h3>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-              labore sit non ipsum temporibus quidem, deserunt eaque officiis
-              mollitia ratione suscipit repellat.
+              At Encryptix, I contributed as a Cloud Engineer, focusing on
+              designing and deploying secure, scalable, and highly available
+              cloud infrastructure. I automated deployments using Terraform 
+              and Ansible, containerized microservices with Docker, and
+              managed orchestration using Kubernetes.
             </p>
           </div>
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Position In Company</h4>
-                <h5>Company Name</h5>
+                <h4>Python Developer</h4>
+                <h5>Codsoft</h5>
               </div>
-              <h3>20XX</h3>
+              <h3>2024</h3>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-              labore sit non ipsum temporibus quidem, deserunt eaque officiis
-              mollitia ratione suscipit repellat.
+              As a Python Developer at CodSoft, I developed efficient and
+              modular code for real-world applications, focusing on automation,
+              data handling, and backend logic. I worked on creating RESTful APIs, 
+              optimized data processing tasks, and contributed to building clean, 
+              maintainable codebases. .
             </p>
           </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Position In Company</h4>
-                <h5>Company Name</h5>
-              </div>
-              <h3>NOW</h3>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-              labore sit non ipsum temporibus quidem, deserunt eaque officiis
-              mollitia ratione suscipit repellat.
-            </p>
-          </div>
+          
         </div>
       </div>
     </div>
