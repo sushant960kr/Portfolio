@@ -1,5 +1,5 @@
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 // REMOVED: import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
 // REMOVED: import { SplitText } from "gsap-trial/SplitText";
 
