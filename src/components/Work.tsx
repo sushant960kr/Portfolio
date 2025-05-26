@@ -48,21 +48,32 @@ const Work = () => {
       title: "PHP Web App Deployment with DevOps and Cloud Practices",
       tools: "Linux, AWS, Kubernetes, Jenkins",
       category: "Develop and Deploy it on a Server",
-      image: "/images/1.png", 
+      description:
+        "Engineered a robust CI/CD pipeline using **Jenkins** to automate the deployment of a **PHP** web application. The infrastructure was provisioned and managed on **AWS** using **Kubernetes**, demonstrating expertise in cloud-native deployments and **Linux** server management.",
+      image: "/images/1.webp",
+      source: "https://github.com/sushant960kr/php-project.git",
     },
     {
       id: 2,
       title: "Weather App",
       tools: "HTML, CSS, JS, API",
       category: "App Development with the use of open source API",
-      image: "/images/2.png", 
+      description:
+        "Developed a responsive weather application utilizing **HTML**, **CSS**, and vanilla **JavaScript**. This project fetches real-time weather data by integrating with the OpenWeatherMap **API**, showcasing proficiency in front-end development and API consumption.",
+      image: "/images/2.webp",
+      demo: "https://weather-m1.netlify.app/",
+      
     },
     {
       id: 3,
       title: "AWS Infrastructure Automation with Terraform",
-      tools: "Code Commit, Code Pipeline, Docker, SSM Parameter Store, Terraform",
+      tools: "Code Commit, Code Pipeline, Docker, SSM, Terraform",
       category: "Create Infrastructure and Deploy it on same environment",
-      image: "/images/3.png", 
+      description:
+        "Automated the provisioning of **AWS** cloud infrastructure using **Terraform**, demonstrating Infrastructure as Code (IaC) principles. The project includes deploying a **Dockerized** application via an **AWS CI/CD pipeline** (using **CodeCommit** and **CodePipeline**), with secure configuration management handled by **SSM**.",
+      image: "/images/3.webp",
+     // Make sure this is a real link if you want it to work
+      source: "https://github.com/sushant960kr/AWSDevOpsProject.git",
     },
   ];
 
@@ -85,8 +96,33 @@ const Work = () => {
                 </div>
                 <h4>Tools used </h4>
                 <p>{project.tools}</p>
+                {/* Project description now explains the project and integrates tools */}
+                <p>{project.description}</p>
+
+                <div className="project-links">
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link-button"
+                    >
+                      Live Demo
+                    </a>
+                  )}
+                  {project.source && (
+                    <a
+                      href={project.source}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link-button"
+                    >
+                      Source Code
+                    </a>
+                  )}
+                </div>
               </div>
-              <WorkImage image="/images/placeholder.webp" alt="" />
+              <WorkImage image={project.image} alt={project.title} />
             </div>
           ))}
         </div>
