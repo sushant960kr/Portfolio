@@ -2,26 +2,25 @@ import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
-import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
+// Removed: import { ScrollSmoother } from "gsap-trial/ScrollSmoother"; // This is a GSAP Club plugin
+
 import "./styles/Navbar.css";
 
-gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
-export let smoother: ScrollSmoother;
+// Register only ScrollTrigger, as ScrollSmoother is a premium plugin
+gsap.registerPlugin(ScrollTrigger);
+
+// Removed: export let smoother: ScrollSmoother; // ScrollSmoother type is no longer available
 
 const Navbar = () => {
   useEffect(() => {
-    smoother = ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1.7,
-      speed: 1.7,
-      effects: true,
-      autoResize: true,
-      ignoreMobileResize: true,
-    });
+    // Removed ScrollSmoother initialization as it's a premium plugin.
+    // The smooth scrolling functionality will no longer be present.
+    // If you need smooth scrolling without GSAP ScrollSmoother,
+    // you would need to implement a custom solution or use a different library.
 
-    smoother.scrollTop(0);
-    smoother.paused(true);
+    // Removed: smoother = ScrollSmoother.create({ ... });
+    // Removed: smoother.scrollTop(0);
+    // Removed: smoother.paused(true);
 
     let links = document.querySelectorAll(".header ul a");
     links.forEach((elem) => {
@@ -30,15 +29,26 @@ const Navbar = () => {
         if (window.innerWidth > 1024) {
           e.preventDefault();
           let elem = e.currentTarget as HTMLAnchorElement;
-          let section = elem.getAttribute("data-href");
-          smoother.scrollTo(section, true, "top top");
+          let sectionId = elem.getAttribute("data-href");
+
+          if (sectionId) {
+            const targetElement = document.querySelector(sectionId);
+            if (targetElement) {
+              // Replaced ScrollSmoother.scrollTo with standard scrollIntoView
+              // This will provide basic jump-scrolling to the section.
+              targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
         }
       });
     });
-    window.addEventListener("resize", () => {
-      ScrollSmoother.refresh(true);
-    });
+
+    // Removed ScrollSmoother.refresh as it's no longer used
+    // window.addEventListener("resize", () => {
+    //   ScrollSmoother.refresh(true);
+    // });
   }, []);
+
   return (
     <>
       <div className="header">
