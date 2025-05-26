@@ -1,19 +1,21 @@
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger"; // Keep ScrollTrigger as it's standard GSAP
 
-// REMOVED: import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
-// REMOVED: import { SplitText } from "gsap-trial/SplitText";
+// Removed all 'gsap-trial' imports and comments related to them.
+// ScrollSmoother and SplitText are premium GSAP plugins and are not included in standard GSAP.
 
 interface ParaElement extends HTMLElement {
   anim?: gsap.core.Animation;
-  // REMOVED: split?: SplitText; // SplitText type is no longer available if you remove the import
+  // Removed 'split?: SplitText;' as SplitText is no longer used.
 }
 
-// Register only ScrollTrigger, as ScrollSmoother and SplitText are removed
+// Register only ScrollTrigger as it's a standard GSAP plugin.
 gsap.registerPlugin(ScrollTrigger);
 
 export default function setSplitText() {
   ScrollTrigger.config({ ignoreMobileResize: true });
   if (window.innerWidth < 900) return;
+
   const paras: NodeListOf<ParaElement> = document.querySelectorAll(".para");
   const titles: NodeListOf<ParaElement> = document.querySelectorAll(".title");
 
@@ -22,27 +24,19 @@ export default function setSplitText() {
 
   paras.forEach((para: ParaElement) => {
     para.classList.add("visible");
-    // You will need to remove or replace the SplitText logic here
-    // as SplitText is a paid plugin.
-    // This section will cause an error without SplitText.
     if (para.anim) {
       para.anim.progress(1).kill();
-      // para.split?.revert(); // This will fail if SplitText is removed
+      // Removed 'para.split?.revert();' as SplitText is no longer used.
     }
 
-    // This line (new SplitText) will cause an error if SplitText is removed.
-    // para.split = new SplitText(para, {
-    //   type: "lines,words",
-    //   linesClass: "split-line",
-    // });
+    // Removed 'new SplitText' initialization as SplitText is no premium plugin.
+    // To achieve text splitting effect, you would need to manually split
+    // the text into individual elements (e.g., spans for words/lines)
+    // and then target those new elements with GSAP.
+    // For now, the animation will apply to the entire 'para' element.
 
-    // You will need to re-think how you target the elements for animation
-    // without SplitText. Maybe target the direct 'para' or 'title' element,
-    // or manually split the text if you still want character/word animation
-    // without the plugin.
     para.anim = gsap.fromTo(
-      // para.split.words, // This will fail without SplitText
-      para, // Example: target the whole paragraph if SplitText is removed
+      para, // Target the entire paragraph element
       { autoAlpha: 0, y: 80 },
       {
         autoAlpha: 1,
@@ -54,24 +48,25 @@ export default function setSplitText() {
         duration: 1,
         ease: "power3.out",
         y: 0,
-        stagger: 0.02, // Stagger might not make sense on a single element
+        // Stagger will apply to the single 'para' element, which might not
+        // produce the desired "word by word" effect. Consider removing or
+        // re-implementing text splitting if this effect is crucial.
+        stagger: 0.02,
       }
     );
   });
+
   titles.forEach((title: ParaElement) => {
-    // Similar to paras, you'll need to remove or replace SplitText logic here.
     if (title.anim) {
       title.anim.progress(1).kill();
-      // title.split?.revert(); // This will fail if SplitText is removed
+      // Removed 'title.split?.revert();' as SplitText is no longer used.
     }
-    // This line (new SplitText) will cause an error if SplitText is removed.
-    // title.split = new SplitText(title, {
-    //   type: "chars,lines",
-    //   linesClass: "split-line",
-    // });
+
+    // Removed 'new SplitText' initialization for titles.
+    // Similar to paragraphs, animation will apply to the entire 'title' element.
+
     title.anim = gsap.fromTo(
-      // title.split.chars, // This will fail without SplitText
-      title, // Example: target the whole title if SplitText is removed
+      title, // Target the entire title element
       { autoAlpha: 0, y: 80, rotate: 10 },
       {
         autoAlpha: 1,
@@ -84,10 +79,12 @@ export default function setSplitText() {
         ease: "power2.inOut",
         y: 0,
         rotate: 0,
-        stagger: 0.03, // Stagger might not make sense on a single element
+        // Stagger will apply to the single 'title' element.
+        stagger: 0.03,
       }
     );
   });
 
+  // Keep this event listener for ScrollTrigger refreshes
   ScrollTrigger.addEventListener("refresh", () => setSplitText());
 }
