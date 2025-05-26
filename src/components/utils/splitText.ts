@@ -1,14 +1,15 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
-import { SplitText } from "gsap-trial/SplitText";
+// REMOVED: import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
+// REMOVED: import { SplitText } from "gsap-trial/SplitText";
 
 interface ParaElement extends HTMLElement {
   anim?: gsap.core.Animation;
-  split?: SplitText;
+  // REMOVED: split?: SplitText; // SplitText type is no longer available if you remove the import
 }
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
+// Register only ScrollTrigger, as ScrollSmoother and SplitText are removed
+gsap.registerPlugin(ScrollTrigger);
 
 export default function setSplitText() {
   ScrollTrigger.config({ ignoreMobileResize: true });
@@ -21,18 +22,27 @@ export default function setSplitText() {
 
   paras.forEach((para: ParaElement) => {
     para.classList.add("visible");
+    // You will need to remove or replace the SplitText logic here
+    // as SplitText is a paid plugin.
+    // This section will cause an error without SplitText.
     if (para.anim) {
       para.anim.progress(1).kill();
-      para.split?.revert();
+      // para.split?.revert(); // This will fail if SplitText is removed
     }
 
-    para.split = new SplitText(para, {
-      type: "lines,words",
-      linesClass: "split-line",
-    });
+    // This line (new SplitText) will cause an error if SplitText is removed.
+    // para.split = new SplitText(para, {
+    //   type: "lines,words",
+    //   linesClass: "split-line",
+    // });
 
+    // You will need to re-think how you target the elements for animation
+    // without SplitText. Maybe target the direct 'para' or 'title' element,
+    // or manually split the text if you still want character/word animation
+    // without the plugin.
     para.anim = gsap.fromTo(
-      para.split.words,
+      // para.split.words, // This will fail without SplitText
+      para, // Example: target the whole paragraph if SplitText is removed
       { autoAlpha: 0, y: 80 },
       {
         autoAlpha: 1,
@@ -44,21 +54,24 @@ export default function setSplitText() {
         duration: 1,
         ease: "power3.out",
         y: 0,
-        stagger: 0.02,
+        stagger: 0.02, // Stagger might not make sense on a single element
       }
     );
   });
   titles.forEach((title: ParaElement) => {
+    // Similar to paras, you'll need to remove or replace SplitText logic here.
     if (title.anim) {
       title.anim.progress(1).kill();
-      title.split?.revert();
+      // title.split?.revert(); // This will fail if SplitText is removed
     }
-    title.split = new SplitText(title, {
-      type: "chars,lines",
-      linesClass: "split-line",
-    });
+    // This line (new SplitText) will cause an error if SplitText is removed.
+    // title.split = new SplitText(title, {
+    //   type: "chars,lines",
+    //   linesClass: "split-line",
+    // });
     title.anim = gsap.fromTo(
-      title.split.chars,
+      // title.split.chars, // This will fail without SplitText
+      title, // Example: target the whole title if SplitText is removed
       { autoAlpha: 0, y: 80, rotate: 10 },
       {
         autoAlpha: 1,
@@ -71,7 +84,7 @@ export default function setSplitText() {
         ease: "power2.inOut",
         y: 0,
         rotate: 0,
-        stagger: 0.03,
+        stagger: 0.03, // Stagger might not make sense on a single element
       }
     );
   });
