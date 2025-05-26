@@ -2,6 +2,7 @@
 
 This repository contains the open source version of my 3D portfolio website. Do check it out!
 
+Link : https://krsushant.netlify.app/
 ## Instructions 🛠️
 
 I have modified the GSAP club plugins with the trial plugins, but with the trial plugin, you cannot host it⛔️. For Club plugins, check out here: [GSAP Installation](https://gsap.com/docs/v3/Installation/).
